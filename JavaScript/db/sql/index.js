@@ -19,19 +19,18 @@ const path = require('path');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 module.exports = {
-    users: {
-        create: sql('users/create.sql'),
-        empty: sql('users/empty.sql'),
-        init: sql('users/init.sql'),
-        drop: sql('users/drop.sql'),
-        add: sql('users/add.sql')
+    util: {
+        create: sql('util/create.sql')
     },
-    products: {
-        create: sql('products/create.sql'),
-        empty: sql('products/empty.sql'),
-        drop: sql('products/drop.sql'),
-        find: sql('products/find.sql'),
-        add: sql('products/add.sql')
+    organization: {
+        add: sql('organization/add.sql')
+    },
+    supervisor: {
+        add: sql('supervisor/add.sql'),
+        findById: sql('supervisor/findById.sql'),
+        findByUsername: sql('supervisor/findByUsername.sql'),
+        findByOrganization: sql('supervisor/findByOrganization.sql'),
+        edit: sql('supervisor/edit.sql')        
     }
 };
 

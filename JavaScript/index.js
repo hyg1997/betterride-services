@@ -11,6 +11,17 @@ const app = express();
 // 2. The demo's focus is on a proper database layer, not a web server.
 
 //////////////////////////////////////////////
+// Organizations Web API
+//////////////////////////////////////////////
+
+GET('/utils/', () => db.utils.create());
+
+//////////////////////////////////////////////
+// Organizations Web API
+//////////////////////////////////////////////
+
+
+//////////////////////////////////////////////
 // Users Web API
 //////////////////////////////////////////////
 
@@ -56,13 +67,13 @@ GET('/users/total', () => db.users.total());
 GET('/products/create', () => db.products.create());
 
 // drop the table:
-GET('/products/drop', () => db.products.drop());
+DELETE('/products/drop', () => db.products.drop());
 
 // remove all products:
-GET('/products/empty', () => db.products.empty());
+DELETE('/products/empty', () => db.products.empty());
 
 // add a new user product, if it doesn't exist yet, and return the object:
-GET('/products/add/:userId/:name', req => {
+POST('/products/add/:userId/:name', req => {
     return db.task('add-product', t => {
         return t.products.find(req.params)
             .then(product => {
@@ -75,7 +86,7 @@ GET('/products/add/:userId/:name', req => {
 GET('/products/find/:userId/:name', req => db.products.find(req.params));
 
 // remove a product by id:
-GET('/products/remove/:id', req => db.products.remove(req.params.id));
+DELETE('/products/remove/:id', req => db.products.remove(req.params.id));
 
 // get all products:
 GET('/products/all', () => db.products.all());
@@ -106,7 +117,7 @@ function GET(url, handler) {
     });
 }
 
-const port = 3000;
+const port = 323;
 
 app.listen(port, () => {
     console.log('\nReady for GET requests on http://localhost:' + port);

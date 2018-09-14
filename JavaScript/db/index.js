@@ -22,6 +22,8 @@ const initOptions = {
         // and transaction being executed, which should be as fast as possible.
         obj.users = new repos.Users(obj, pgp);
         obj.products = new repos.Products(obj, pgp);
+        obj.organizations = new repos.Organization(obj, pgp);
+        obj.utils = new repos.Util(obj);
     }
 };
 
@@ -29,7 +31,7 @@ const initOptions = {
 const config = {
     host: 'localhost',
     port: 5432,
-    database: 'pg-promise-demo',
+    database: 'better-ride',
     user: 'postgres'
 };
 
