@@ -20,10 +20,8 @@ const initOptions = {
 
         // Do not use 'require()' here, because this event occurs for every task
         // and transaction being executed, which should be as fast as possible.
-        obj.users = new repos.Users(obj, pgp);
-        obj.products = new repos.Products(obj, pgp);
         obj.organizations = new repos.Organization(obj, pgp);
-        obj.utils = new repos.Util(obj);
+        obj.supervisors = new repos.Supervisor(obj, pgp);
     }
 };
 

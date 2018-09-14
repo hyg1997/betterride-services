@@ -8,7 +8,7 @@ const cs = {}; // Reusable ColumnSet objects.
  This repository mixes hard-coded and dynamic SQL, primarily to show a diverse example of using both.
  */
 
-class OrganizationsRepository {
+class SupervisorRepository {
     constructor(db, pgp) {
         this.db = db;
         this.pgp = pgp;
@@ -17,33 +17,33 @@ class OrganizationsRepository {
         createColumnsets(pgp);
     }
     // Adds a new user, and returns the new object;
-    add(name,lastname,email,username,password,id_organization) {
-        return this.db.one(sql.add,name,);
+    add(values) {
+        return this.db.one(sql.add, [values.name, values.lastname, values.email, values.username, values.password, +values.id_organization]);
     }
 
     // Tries to delete a user by id, and returns the number of records deleted;
     remove(id) {
-        return this.db.result('DELETE FROM users WHERE id = $1', +id, r => r.rowCount);
+        return this.db.result('DELETE FROM supervisor WHERE id = $1', +id, r => r.rowCount);
     }
 
     // Tries to find a user from id;
     findById(id) {
-        return this.db.oneOrNone('SELECT * FROM users WHERE id = $1', +id);
+        return this.db.oneOrNone('SELECT * FROM supervisor WHERE id = $1', +id);
     }
 
     // Tries to find a user from name;
     findByName(name) {
-        return this.db.oneOrNone('SELECT * FROM users WHERE name = $1', name);
+        return this.db.oneOrNone('SELECT * FROM supervisor WHERE name = $1', name);
     }
 
     // Returns all user records;
     all() {
-        return this.db.any('SELECT * FROM users');
+        return this.db.any('SELECT * FROM supervisor');
     }
 
     // Returns the total number of users;
     total() {
-        return this.db.one('SELECT count(*) FROM users', [], a => +a.count);
+        return this.db.one('SELECT count(*) FROM supervisor', [], a => +a.count);
     }
 }
 
@@ -55,12 +55,12 @@ function createColumnsets(pgp) {
     if (!cs.insert) {
         // Type TableName is useful when schema isn't default "public" ,
         // otherwise you can just pass in a string for the table name.
-        const table = new pgp.helpers.TableName({table: 'organization', schema: 'public'});
+        const table = new pgp.helpers.TableName({table: 'supervisor', schema: 'public'});
 
-        cs.insert = new pgp.helpers.ColumnSet(['name','token'], {table});
-        cs.update = cs.insert.extend(['?id']);
+        cs.insert = new pgp.helpers.ColumnSet(['name','lastname', 'email', 'username', 'password'], {table});
+        cs.update = cs.insert.extend(['?id', '?id_organization']);
     }
     return cs;
 }
 
-module.exports = UsersRepository;
+module.exports = SupervisorRepository;

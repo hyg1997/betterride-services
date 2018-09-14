@@ -18,13 +18,8 @@ class OrganizationRepository {
     }
 
     // Adds a new user, and returns the new object;
-    add(name) {
-        return this.db.one(sql.add, name, token);
-    }
-
-    // Tries to delete a user by id, and returns the number of records deleted;
-    remove(id) {
-        return this.db.result('DELETE FROM organization WHERE id = $1', +id, r => r.rowCount);
+    add(values) {
+        return this.db.one(sql.add,[values.name,values.token]);
     }
 
     // Tries to find a user from id;

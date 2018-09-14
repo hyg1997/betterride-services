@@ -1,24 +1,22 @@
 {
-  "name": "pg-promise-demo",
-  "version": "0.8.3",
-  "description": "Advanced demo of using pg-promise.",
+  "name": "betterride-services",
+  "version": "0.0.1",
+  "description": "BetterRide Services",
   "main": "index.js",
-  "homepage": "https://github.com/vitaly-t/pg-promise-demo",
   "repository": {
     "type": "git",
     "url": "https://github.com/vitaly-t/pg-promise-demo.git"
   },
-  "bugs": {
-    "url": "https://github.com/vitaly-t/pg-promise-demo/issues",
-    "email": "vitaly.tomilov@gmail.com"
+  "scripts": {
+    "start": "node index.js"
   },
   "keywords": [
     "pg-promise",
     "pg-promise demo"
   ],
   "author": {
-    "name": "Vitaly Tomilov",
-    "email": "vitaly.tomilov@gmail.com"
+    "name": "Hugo Yupanqui",
+    "email": "u201515078@gmail.com"
   },
   "license": "MIT",
   "engines": {
@@ -27,12 +25,10 @@
   },
   "dependencies": {
     "bluebird": "~3.5.1",
+    "body-parser": "^1.18.3",
     "express": "~4.16.2",
     "pg-monitor": "~0.8.5",
     "pg-promise": "~7.5.3"
   },
-  "devDependencies": {
-    "@types/node": "~9.4.6",
-    "typescript": "~2.7.2"
-  }
+  "devDependencies": {}
 }

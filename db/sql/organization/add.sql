@@ -1,4 +1,4 @@
 
 INSERT INTO ${schema~}.organization(name, token)
-VALUES(${organizationtName}, ${organizationToken})
+VALUES($1, $2)
 RETURNING *

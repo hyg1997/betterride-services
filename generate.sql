@@ -2,16 +2,16 @@
     All data tables creation
 */
 
-CREATE TABLE ${schema~}.organization
+CREATE TABLE public.organization
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY ,
     name text NOT NULL,
     token text NOT NULL
 );
 
-CREATE TABLE ${schema~}.supervisor
+CREATE TABLE public.supervisor
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name text NOT NULL,
     lastname text NOT NULL,
     email text,
@@ -20,9 +20,9 @@ CREATE TABLE ${schema~}.supervisor
     id_organization INTEGER REFERENCES organization(id)
 );
 
-CREATE TABLE ${schema~}.operator
+CREATE TABLE public.operator
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name text NOT NULL,
     lastname text NOT NULL,
     email text ,
@@ -32,57 +32,54 @@ CREATE TABLE ${schema~}.operator
 
 );
 
-CREATE TABLE ${schema~}.project 
+CREATE TABLE public.project 
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     Date text,
     name text NOT NULL,
     id_supervisor INTEGER REFERENCES supervisor(id)
 );
 
-CREATE TABLE ${schema~}.junction 
+CREATE TABLE public.junction 
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     id_project  INTEGER REFERENCES project(id)
 );
 
-CREATE TABLE ${schema~}.session 
+CREATE TABLE public.session 
 (
-     id INTEGER PRIMARY KEY,
+     id SERIAL PRIMARY KEY,
      date text,
      start_time text,
      end_time text,
      id_junction INTEGER REFERENCES junction(id)
 );
-CREATE TABLE ${schema~}.avenue 
+CREATE TABLE public.avenue 
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name text NOT NULL,
 
 );
-CREATE TABLE ${schema~}.lane
+CREATE TABLE public.lane
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     description text,
     id_avenue INTEGER REFERENCES avenue(id)
 );
 
-CREATE TABLE ${schema~}.lanes_count 
+CREATE TABLE public.lanes_count 
 (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     id_operator INTEGER REFERENCES operator(id),
     id_lane INTEGER REFERENCES lane(id),
     id_session INTEGER REFERENCES session(id)
 );
 
-CREATE TABLE ${schema~}.cars_count 
+CREATE TABLE public.cars_count 
 (
-        id INTEGER PRIMARY KEY,
+        id SERIAL PRIMARY KEY,
         hour text,
         type text,
         turn text,
         id_lanes_count INTEGER REFERENCES lanes_count(id)
 );
-
-
-
